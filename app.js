@@ -4,7 +4,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const noticesRouter = require("./routes/api/notices");
-
+const newsRouter = require("./routes/api/news");
+const sponsorsRouter = require("./routes/api/sponsors");
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -14,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/notices", noticesRouter);
+app.use("/api/news", newsRouter);
+app.use("/api/sponsors", sponsorsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
