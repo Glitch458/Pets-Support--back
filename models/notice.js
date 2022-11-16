@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
+
 const noticeSchema = new Schema({}, { versionKey: false, timestamps: true });
 
 const joiSchema = Joi.object({});
