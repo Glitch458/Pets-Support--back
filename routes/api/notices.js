@@ -3,6 +3,6 @@ const ctrl = require("../../controllers/notices");
 const router = express.Router();
 const { ctrlWrapper } = require("../../helpers/");
 
-router.get("/", ctrlWrapper(ctrl.getAllNotices));
+router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 
 module.exports = router;

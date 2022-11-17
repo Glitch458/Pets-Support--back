@@ -1,5 +1,5 @@
-const getAllNotices = require("./getAllNotices");
+const getNoticesByCategory = require("./getNoticesByCategory");
 
 module.exports = {
-  getAllNotices,
+  getNoticesByCategory,
 };
