@@ -1,8 +1,29 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
-
-const noticeSchema = new Schema({}, { versionKey: false, timestamps: true });
+const noticeSchema = new Schema(
+  {
+    category: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    breed: {
+      type: String,
+    },
+    place: {
+      type: String,
+      required: true,
+    },
+    birthday: {
+      type: String,
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
 
 const joiSchema = Joi.object({});
 
