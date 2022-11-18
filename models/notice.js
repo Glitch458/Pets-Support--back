@@ -21,6 +21,10 @@ const noticeSchema = new Schema(
     birthday: {
       type: String,
     },
+    sex: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
