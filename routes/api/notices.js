@@ -19,5 +19,11 @@ router.post(
   validateBody(schemas.addSchema),
   ctrlWrapper(ctrl.addNotice)
 );
+router.post(
+  "/id/:noticeId",
+  isValidId,
+  authenticate,
+  ctrlWrapper(ctrl.updateFavorite)
+);
 
 module.exports = router;
