@@ -4,7 +4,7 @@ const router = express.Router();
 const ctrl = require("../../controllers/user");
 
 const {
-  // isValidId,
+  isValidId,
   validateBody,
   authenticate,
   upload,
@@ -19,6 +19,13 @@ router.post(
   upload.single("uploadPhoto"),
   validateBody(schemas.addUserPetSchema),
   ctrlWrapper(ctrl.addUserPet)
+);
+
+router.delete(
+  "/:noticeId",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.removeUserPet)
 );
 
 module.exports = router;
