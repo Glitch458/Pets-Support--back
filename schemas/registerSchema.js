@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 const registerSchema = Joi.object({
     password: Joi.string().max(32).required(),

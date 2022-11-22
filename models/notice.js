@@ -1,45 +1,49 @@
 const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+const { handleSaveErrors } = require("../helpers");
 
-const noticeSchema = new Schema(
-  {
-    category: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    breed: {
-      type: String,
-    },
-    place: {
-      type: String,
-      required: true,
-    },
-    birthday: {
-      type: String,
-    },
-    sex: {
-      type: String,
-      required: true,
-    },
+const noticeSchema = new Schema({
+  category: {
+    type: String,
+    required: true,
   },
-  { versionKey: false, timestamps: true }
-);
-
-const joiSchema = Joi.object({});
-
-const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean().required(),
+  title: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+  },
+  birthday: {
+    type: String,
+  },
+  breed: {
+    type: String,
+  },
+  sex: {
+    type: String,
+    required: true,
+  },
+  place: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: String,
+  },
+  photoURL: {
+    type: String,
+  },
+  comments: {
+    type: String,
+  },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
 
-const schemas = { joiSchema, updateFavoriteSchema };
+noticeSchema.post("save", handleSaveErrors);
 
 const Notice = model("notice", noticeSchema);
 
-module.exports = {
-  Notice,
-  schemas,
-};
+module.exports = { Notice };
