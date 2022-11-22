@@ -5,10 +5,11 @@ const validateBody = (schema) => {
     const { error } = schema.validate(req.body);
     if (error) {
       next(RequestError(400, error.message));
-    }
-    next();
+        }
+        next();
   };
   return validateFunction;
 };
 
 module.exports = validateBody;
+
