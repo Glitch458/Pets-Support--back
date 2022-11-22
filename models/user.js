@@ -26,6 +26,7 @@ const userSchema = new Schema(
       unique: true,
     },
     favorites: [{ type: Schema.ObjectId, ref: "notice" }],
+    myPets: [{ type: Schema.ObjectId, ref: "userpet" }],
     token: {
       type: String,
       default: null,
