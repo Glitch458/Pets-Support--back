@@ -30,7 +30,7 @@ const addUserPet = async (req, res) => {
     { _id: owner },
     { $push: { myPets: userNotice } }
   );
-  res.json(result);
+  res.json(userNotice);
 };
 
 module.exports = addUserPet;
