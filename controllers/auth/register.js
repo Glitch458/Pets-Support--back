@@ -5,7 +5,7 @@ const { RequestError } = require('../../helpers');
 const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {
-    const { email, password, name } = req.body;
+    const { email, password, name, city, phone } = req.body;
     const user = await User.findOne({ email });
     console.log(name);
     if (user) {
@@ -17,7 +17,7 @@ const register = async (req, res) => {
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
-    const result = await User.create({ email, password: hashPassword, name });
+    const result = await User.create({ email, password: hashPassword, name, city, phone });
 
     const payload = {
         id: result._id
