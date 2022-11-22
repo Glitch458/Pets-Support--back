@@ -12,6 +12,7 @@ const schemas = require("../../schemas/notice");
 
 router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 router.get("/id/:noticeId", isValidId, ctrlWrapper(ctrl.getNoticeById));
+router.get("/ads/:userId", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
 router.post(
   "/",
   authenticate,
