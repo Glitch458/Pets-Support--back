@@ -15,15 +15,15 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    city: {
-        type: String,
-        required: true,
-    },
-    phone: {
-        type: String,
-        required: true,
-        unique: true,
-    },
+    // city: {
+    //     type: String,
+    //     required: true,
+    // },
+    // phone: {
+    //     type: String,
+    //     required: true,
+    //     unique: true,
+    // },
     token: {
         type: String,
         default: null,
