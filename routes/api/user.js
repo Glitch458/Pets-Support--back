@@ -13,6 +13,8 @@ const {
 const { ctrlWrapper } = require("../../helpers/");
 const schemas = require("../../schemas/userPet");
 
+router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
+
 router.post(
   "/",
   authenticate,
