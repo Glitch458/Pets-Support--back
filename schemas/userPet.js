@@ -1,11 +1,11 @@
-const Joi = require("joi");
+const Joi = require("joi").extend(require("@joi/date"));
 
 const addUserPetSchema = Joi.object({
   name: Joi.string()
     .regex(/^[a-zA-Z]+$/)
     .min(2)
     .max(16),
-  date: Joi.date(),
+  date: Joi.date().format("DD.MM.YYYY").utc(),
   breed: Joi.string()
     .regex(/^[a-zA-Z]+$/)
     .min(2)
