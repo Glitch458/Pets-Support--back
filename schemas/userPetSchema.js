@@ -1,6 +1,6 @@
 const Joi = require("joi").extend(require("@joi/date"));
 
-const addUserPetSchema = Joi.object({
+const UserPetSchema = Joi.object({
   name: Joi.string()
     .regex(/^[a-zA-Z]+$/)
     .min(2)
@@ -14,4 +14,4 @@ const addUserPetSchema = Joi.object({
   photoURL: Joi.string(),
 });
 
-module.exports = { addUserPetSchema };
+module.exports = UserPetSchema;

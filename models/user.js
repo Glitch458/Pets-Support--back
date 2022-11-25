@@ -25,6 +25,9 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    birthday: {
+      type: String,
+    },
     favorites: [{ type: Schema.ObjectId, ref: "notice" }],
     myPets: [{ type: Schema.ObjectId, ref: "userpet" }],
     token: {
