@@ -1,38 +1,45 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../../models/user');
-const { RequestError } = require('../../helpers');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../../models/user");
+const { RequestError } = require("../../helpers");
 const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {
-    const { email, password, name, city, phone } = req.body;
-    const user = await User.findOne({ email });
-    console.log(name);
-    if (user) {
-        throw RequestError(409, 'Email in use')
-    }
-    if (password.length < 7) {
-        res.status(400);
-        throw new Error('Password must be at least 7 characters long');
-    }
+  const { email, password, name, city, phone } = req.body;
+  const user = await User.findOne({ email });
+  console.log(name);
+  if (user) {
+    throw RequestError(409, "Email in use");
+  }
+  if (password.length < 7) {
+    res.status(400);
+    throw new Error("Password must be at least 7 characters long");
+  }
 
-    const hashPassword = await bcrypt.hash(password, 10);
-    const result = await User.create({ email, password: hashPassword, name, city, phone });
+  const hashPassword = await bcrypt.hash(password, 10);
+  const result = await User.create({
+    email,
+    password: hashPassword,
+    name,
+    city,
+    phone,
+  });
 
-    const payload = {
-        id: result._id
-    }
+  const payload = {
+    id: result._id,
+  };
 
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
-    await User.findByIdAndUpdate(result._id, { token })
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+  await User.findByIdAndUpdate(result._id, { token });
 
-    res.status(201).json({
-        user: {
-            email: result.email,
-            name: result.name,
-        },
-        token
-    })
-}
+  res.status(201).json({
+    user: {
+      id: result._id,
+      email: result.email,
+      name: result.name,
+    },
+    token,
+  });
+};
 
 module.exports = register;
