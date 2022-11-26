@@ -10,16 +10,24 @@ const {
   upload,
 } = require("../../middlewares");
 
-const { ctrlWrapper } = require("../../helpers/");
-const schemas = require("../../schemas/userPet");
+const { ctrlWrapper } = require("../../helpers");
+const schemas = require("../../schemas");
 
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
+
+router.patch(
+  "/:contactId",
+  authenticate,
+  isValidId,
+  validateBody(schemas.updateUserSchema),
+  ctrlWrapper(ctrl.updateUser)
+);
 
 router.post(
   "/",
   authenticate,
   upload.single("uploadPhoto"),
-  validateBody(schemas.addUserPetSchema),
+  validateBody(schemas.UserPetSchema),
   ctrlWrapper(ctrl.addUserPet)
 );
 
