@@ -1,8 +1,11 @@
 const User = require("../../models/user");
+const RequestError = require("../../helpers/");
 
-const getOwnerNotices = async (req, res) => {
-  const { userId } = req.params;
-  const result = await User.findOne({ _id: userId }).populate("favorites");
+const getFavoriteNotices = async (req, res) => {
+  const { id: userId } = req.user;
+  const currentUser = await User.findOne({ _id: userId }).populate("favorites");
+
+  const result = currentUser.favorites;
 
   if (!result) {
     throw RequestError(404);
@@ -10,4 +13,4 @@ const getOwnerNotices = async (req, res) => {
   res.status(200).json(result);
 };
 
-module.exports = getOwnerNotices;
+module.exports = getFavoriteNotices;

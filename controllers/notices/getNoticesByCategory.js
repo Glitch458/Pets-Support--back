@@ -1,4 +1,5 @@
 const { Notice } = require("../../models/notice");
+const { RequestError } = require("../../helpers");
 
 const getNoticesByCategory = async (req, res) => {
   const { categoryName } = req.params;
