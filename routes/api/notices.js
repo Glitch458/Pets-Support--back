@@ -10,15 +10,6 @@ const {
 const { ctrlWrapper } = require("../../helpers/");
 const schemas = require("../../schemas/notice");
 
-router.get("/id/:noticeId", isValidId, ctrlWrapper(ctrl.getNoticeById));
-router.post(
-  "/id/:noticeId",
-  isValidId,
-  authenticate,
-  ctrlWrapper(ctrl.updateFavorite)
-);
-router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
-router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 router.post(
   "/",
   authenticate,
@@ -26,5 +17,15 @@ router.post(
   validateBody(schemas.addSchema),
   ctrlWrapper(ctrl.addNotice)
 );
+router.get("/id/:noticeId", isValidId, ctrlWrapper(ctrl.getNoticeById));
+router.delete("/id/:noticeId", isValidId, ctrlWrapper(ctrl.removeNoticeById));
+router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
+router.post(
+  "/id/:noticeId",
+  isValidId,
+  authenticate,
+  ctrlWrapper(ctrl.updateFavorite)
+);
+router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 
 module.exports = router;

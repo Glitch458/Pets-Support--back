@@ -16,7 +16,7 @@ const schemas = require("../../schemas");
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
 
 router.patch(
-  "/:contactId",
+  "/:userId",
   authenticate,
   isValidId,
   validateBody(schemas.updateUserSchema),
