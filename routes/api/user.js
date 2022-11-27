@@ -38,19 +38,4 @@ router.delete(
   ctrlWrapper(ctrl.removeUserPet)
 );
 
-router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
-
-router.post(
-  "/favorite/:noticeId",
-  isValidId,
-  authenticate,
-  ctrlWrapper(ctrl.updateFavorite)
-);
-
-router.delete(
-  "/favorite/:noticeId",
-  authenticate,
-  ctrlWrapper(ctrl.removeFavoriteNotice)
-);
-
 module.exports = router;
