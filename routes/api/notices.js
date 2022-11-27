@@ -19,13 +19,6 @@ router.post(
 );
 router.get("/id/:noticeId", isValidId, ctrlWrapper(ctrl.getNoticeById));
 router.delete("/id/:noticeId", isValidId, ctrlWrapper(ctrl.removeNoticeById));
-router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
-router.post(
-  "/id/:noticeId",
-  isValidId,
-  authenticate,
-  ctrlWrapper(ctrl.updateFavorite)
-);
 router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 
 module.exports = router;

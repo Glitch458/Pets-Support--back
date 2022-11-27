@@ -1,5 +1,5 @@
 const User = require("../../models/user");
-const RequestError = require("../../helpers/");
+const RequestError = require("../../helpers");
 
 const getFavoriteNotices = async (req, res) => {
   const { id: userId } = req.user;
