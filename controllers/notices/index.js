@@ -10,6 +10,6 @@ module.exports = {
   getNoticeById,
   addNotice,
   getFavoriteNotices,
-  addFavorite,
+  addFavoriteNotice,
   removeFavoriteNotice,
 };
