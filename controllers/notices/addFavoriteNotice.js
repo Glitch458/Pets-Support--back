@@ -1,7 +1,7 @@
 const User = require("../../models/user");
 const RequestError = require("../../helpers");
 
-const updateFavorite = async (req, res) => {
+const addFavoriteNotice = async (req, res) => {
   const { noticeId } = req.params;
   const { id: userId } = req.user;
   const result = await User.findByIdAndUpdate(
@@ -15,4 +15,4 @@ const updateFavorite = async (req, res) => {
   res.json(result);
 };
 
-module.exports = updateFavorite;
+module.exports = addFavoriteNotice;

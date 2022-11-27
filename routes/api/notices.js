@@ -26,7 +26,7 @@ router.post(
   "/favorite/:noticeId",
   isValidId,
   authenticate,
-  ctrlWrapper(ctrl.addFavorite)
+  ctrlWrapper(ctrl.addFavoriteNotice)
 );
 router.delete(
   "/favorite/:noticeId",
