@@ -36,4 +36,14 @@ router.get("/id/:noticeId", isValidId, ctrlWrapper(ctrl.getNoticeById));
 router.delete("/id/:noticeId", isValidId, ctrlWrapper(ctrl.removeNoticeById));
 router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 
+// MyAds
+router.get("/my-ads", authenticate, ctrlWrapper(ctrl.getMyAds));
+
+router.delete(
+  "/my-ads/:noticeId",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.removeMyAd)
+);
+
 module.exports = router;
