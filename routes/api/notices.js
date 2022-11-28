@@ -25,10 +25,10 @@ router.delete(
 );
 
 // MyAds
-router.get("/my-ads", authenticate, ctrlWrapper(ctrl.getMyAds));
+router.get("/own", authenticate, ctrlWrapper(ctrl.getMyAds));
 
 router.delete(
-  "/my-ads/:noticeId",
+  "/own/:noticeId",
   authenticate,
   isValidId,
   ctrlWrapper(ctrl.removeMyAd)
