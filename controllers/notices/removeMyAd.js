@@ -3,18 +3,17 @@ const User = require("../../models/user");
 
 const removeMyAd = async (req, res) => {
   const { id: owner } = req.user;
-  console.log(req.user);
   const { noticeId } = req.params;
-  // const removeMyAd = await UserPet.findByIdAndRemove(noticeId);
+  const removeMyAd = await UserPet.findByIdAndRemove(noticeId);
 
   if (!removeMyAd) {
     res.status(404).json({ message: "Not found" });
   }
 
-  // const updateUser = await User.findByIdAndUpdate(
-  //   { _id: owner },
-  //   { $pull: { myPets: noticeId } }
-  // );
+  const updateUser = await User.findByIdAndUpdate(
+    { _id: owner },
+    { $pull: { myPets: noticeId } }
+  );
 
   res.json({ message: "ad deleted" });
 };

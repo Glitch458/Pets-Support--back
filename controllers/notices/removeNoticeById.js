@@ -3,7 +3,6 @@ const { RequestError } = require("../../helpers");
 
 const removeNoticeById = async (req, res) => {
   const { noticeId } = req.params;
-  console.log(noticeId);
   const result = await Notice.findByIdAndRemove(noticeId);
   if (!noticeId) {
     throw RequestError(404);
