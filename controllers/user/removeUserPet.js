@@ -15,7 +15,7 @@ const removeUserPet = async (req, res) => {
     { $pull: { myPets: noticeId } }
   );
 
-  res.status(200).json({ message: "contact deleted" });
+  res.status(200).json({ message: "ad deleted" });
 };
 
 module.exports = removeUserPet;
