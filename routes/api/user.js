@@ -16,9 +16,9 @@ const schemas = require("../../schemas");
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
 
 router.patch(
-  "/:userId",
+  "/update",
   authenticate,
-  isValidId,
+  upload.single("uploadAvatar"),
   validateBody(schemas.updateUserSchema),
   ctrlWrapper(ctrl.updateUser)
 );
