@@ -14,6 +14,7 @@ const { ctrlWrapper } = require("../../helpers");
 const schemas = require("../../schemas");
 
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
+router.get("/mypets", authenticate, ctrlWrapper(ctrl.getUserPets));
 
 router.patch(
   "/update",
