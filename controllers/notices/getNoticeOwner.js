@@ -1,4 +1,4 @@
-const getNoticeById = requre("./getNoticeById");
+const getNoticeById = require("./getNoticeById");
 const RequestError = require("../../helpers");
 
 const getNoticeOwner = async (req, res) => {
