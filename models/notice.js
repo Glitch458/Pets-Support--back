@@ -23,7 +23,7 @@ const noticeSchema = new Schema({
     type: String,
     required: true,
   },
-  place: {
+  location: {
     type: String,
     required: true,
   },
