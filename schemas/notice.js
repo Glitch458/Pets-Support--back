@@ -7,7 +7,7 @@ const addSchema = Joi.object({
   birthday: Joi.string(),
   breed: Joi.string(),
   sex: Joi.string().required(),
-  place: Joi.string().required(),
+  location: Joi.string().required(),
   price: Joi.string(),
   photoURL: Joi.string(),
   comments: Joi.string(),
