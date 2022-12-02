@@ -42,8 +42,8 @@ router.post(
   validateBody(schemas.addSchema),
   ctrlWrapper(ctrl.addNotice)
 );
+router.get("/id/owner/:noticeId/", isValidId, ctrlWrapper(ctrl.getNoticeOwner));
 router.get("/id/:noticeId", isValidId, ctrlWrapper(ctrl.getNoticeById));
-router.get("/id/:noticeId/owner", isValidId, ctrlWrapper(ctrl.getNoticeOwner));
 router.delete("/id/:noticeId", isValidId, ctrlWrapper(ctrl.removeNoticeById));
 router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 
