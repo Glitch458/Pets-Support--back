@@ -43,6 +43,7 @@ router.post(
   ctrlWrapper(ctrl.addNotice)
 );
 router.get("/id/:noticeId", isValidId, ctrlWrapper(ctrl.getNoticeById));
+router.get("/id/:noticeId/owner", isValidId, ctrlWrapper(ctrl.getNoticeOwner));
 router.delete("/id/:noticeId", isValidId, ctrlWrapper(ctrl.removeNoticeById));
 router.get("/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
 

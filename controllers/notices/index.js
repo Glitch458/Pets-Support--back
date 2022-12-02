@@ -6,6 +6,7 @@ const addFavoriteNotice = require("./addFavoriteNotice");
 const removeFavoriteNotice = require("./removeFavoriteNotice");
 const getMyAds = require("./getMyAds");
 const removeMyAd = require("./removeMyAd");
+const getNoticeOwner = require("./getNoticeOwner");
 
 module.exports = {
   getNoticesByCategory,
@@ -16,4 +17,5 @@ module.exports = {
   removeFavoriteNotice,
   getMyAds,
   removeMyAd,
+  getNoticeOwner,
 };
