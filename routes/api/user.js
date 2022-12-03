@@ -20,7 +20,7 @@ router.patch(
   "/update",
   authenticate,
   // upload.single("uploadAvatar"),
-  validateBody(schemas.updateUserSchema),
+  // validateBody(schemas.updateUserSchema),
   ctrlWrapper(ctrl.updateUser)
 );
 
