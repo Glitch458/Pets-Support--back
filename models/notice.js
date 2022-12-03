@@ -30,7 +30,7 @@ const noticeSchema = new Schema({
   price: {
     type: String,
   },
-  image: {
+  photoURL: {
     type: String,
   },
   comments: {

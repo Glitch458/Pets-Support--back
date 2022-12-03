@@ -9,7 +9,7 @@ const addSchema = Joi.object({
   sex: Joi.string().required(),
   location: Joi.string().required(),
   price: Joi.string(),
-  image: Joi.string(),
+  // photoURL: Joi.string(),
   comments: Joi.string(),
 });
 
