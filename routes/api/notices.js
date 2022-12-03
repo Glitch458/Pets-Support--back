@@ -39,7 +39,7 @@ router.post(
   "/",
   authenticate,
   upload.single("uploadPhoto"),
-  validateBody(schemas.addSchema),
+  // validateBody(schemas.addSchema),
   ctrlWrapper(ctrl.addNotice)
 );
 router.get("/id/owner/:noticeId/", isValidId, ctrlWrapper(ctrl.getNoticeOwner));
