@@ -3,12 +3,12 @@ const ctrl = require("../../controllers/notices");
 const router = express.Router();
 const {
   isValidId,
-  validateBody,
+  // validateBody,
   authenticate,
   upload,
 } = require("../../middlewares");
 const { ctrlWrapper } = require("../../helpers/");
-const schemas = require("../../schemas/notice");
+// const schemas = require("../../schemas/notice");
 
 // favoriteNotices
 router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
