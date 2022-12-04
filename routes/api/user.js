@@ -19,7 +19,7 @@ router.get("/mypets", authenticate, ctrlWrapper(ctrl.getUserPets));
 router.patch(
   "/update",
   authenticate,
-  upload.single("uploadAvatar"),
+  upload.single("avatarURL"),
   validateBody(schemas.updateUserSchema),
   ctrlWrapper(ctrl.updateUser)
 );
@@ -27,7 +27,7 @@ router.patch(
 router.post(
   "/",
   authenticate,
-  upload.single("avatarURL"),
+  upload.single("uploadPhoto"),
   validateBody(schemas.UserPetSchema),
   ctrlWrapper(ctrl.addUserPet)
 );
