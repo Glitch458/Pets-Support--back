@@ -5,7 +5,6 @@ const User = require("../../models/user");
 const { RequestError } = require("../../helpers");
 
 const updateUser = async (req, res) => {
-  console.log(req.file);
   const { _id } = req.user;
   const { name, email, birthday, phone, city } = req.body;
   let avatar = null;
@@ -39,7 +38,6 @@ const updateUser = async (req, res) => {
   if (!result) {
     throw RequestError(404, "Not found");
   }
-
   res.json(result);
   await fs.unlink(req.file.path);
 };

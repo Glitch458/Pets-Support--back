@@ -1,25 +1,37 @@
 const fs = require("fs/promises");
-const path = require("path");
-const Jimp = require("jimp");
+const cloudinary = require("cloudinary").v2;
 
 const { Notice } = require("../../models/notice");
 
 const { RequestError } = require("../../helpers");
 
-const photoDir = path.join(__dirname, "../../", "public", "pets");
-
 const addNotice = async (req, res) => {
   const { id: owner } = req.user;
-  const { path: tempUpload, originalname } = req.file;
-  const resultUpload = path.join(photoDir, originalname);
-  Jimp.read(tempUpload, (error, photo) => {
-    if (error) throw RequestError(401, "Not authorized");
-    photo.resize(328, 328).write(resultUpload);
+  let noticeImg = null;
+
+  if (!owner) {
+    throw RequestError(404, "Not found");
+  }
+
+  if (req.file) {
+    const result1 = await cloudinary.uploader.upload(req.file.path);
+    noticeImg = result1.secure_url;
+  } else {
+    noticeImg = owner.photoURL;
+  }
+
+  const result = await Notice.create({
+    ...req.body,
+    photoURL: noticeImg,
+    owner,
   });
-  await fs.rename(tempUpload, resultUpload);
-  const photoURL = path.join("pets", originalname);
-  const result = await Notice.create({ ...req.body, photoURL, owner });
+
+  if (!result) {
+    throw RequestError(404, "Not found");
+  }
+
   res.status(201).json(result);
+  await fs.unlink(req.file.path);
 };
 
 module.exports = addNotice;
