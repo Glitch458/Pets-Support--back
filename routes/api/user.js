@@ -19,8 +19,8 @@ router.get("/mypets", authenticate, ctrlWrapper(ctrl.getUserPets));
 router.patch(
   "/update",
   authenticate,
-  // upload.single("uploadAvatar"),
-  // validateBody(schemas.updateUserSchema),
+  upload.single("uploadAvatar"),
+  validateBody(schemas.updateUserSchema),
   ctrlWrapper(ctrl.updateUser)
 );
 
