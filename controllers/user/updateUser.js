@@ -1,42 +1,47 @@
 const fs = require("fs/promises");
-const path = require("path");
-const Jimp = require("jimp");
+const cloudinary = require("cloudinary").v2;
 
 const User = require("../../models/user");
 const { RequestError } = require("../../helpers");
 
-const avatarDir = path.join(__dirname, "../../", "public", "avatars");
-
 const updateUser = async (req, res) => {
+  console.log(req.file);
   const { _id } = req.user;
+  const { name, email, birthday, phone, city } = req.body;
+  let avatar = null;
 
-  const { path: tempUpload, originalname } = req.file;
-  const resultUpload = path.join(avatarDir, originalname);
+  if (!_id) {
+    throw RequestError(404, "Not found");
+  }
 
-  Jimp.read(tempUpload, (error, photo) => {
-    if (error) throw RequestError(401, "Not authorized");
-    photo.resize(233, 233).write(resultUpload);
-  });
-  await fs.rename(tempUpload, resultUpload);
-  const avatarURL = path.join("avatars", originalname);
+  if (req.file) {
+    const result1 = await cloudinary.uploader.upload(req.file.path);
+    avatar = result1.secure_url;
+  } else {
+    avatar = _id.avatarURL;
+  }
 
-  const updateAvatar = await User.findByIdAndUpdate(
+  const result = await User.findByIdAndUpdate(
     _id,
-    { avatarURL },
+    {
+      avatarURL: avatar,
+      name,
+      email,
+      birthday,
+      phone,
+      city,
+    },
     {
       new: true,
     }
   );
-
-  const result = await User.findByIdAndUpdate({ _id }, req.body, {
-    new: true,
-  });
 
   if (!result) {
     throw RequestError(404, "Not found");
   }
 
   res.json(result);
+  await fs.unlink(req.file.path);
 };
 
 module.exports = updateUser;
