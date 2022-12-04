@@ -38,7 +38,7 @@ router.delete(
 router.post(
   "/",
   authenticate,
-  upload.single("uploadPhoto"),
+  upload.single("photoURL"),
   // validateBody(schemas.addSchema),
   ctrlWrapper(ctrl.addNotice)
 );
