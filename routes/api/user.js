@@ -13,27 +13,27 @@ const {
 const { ctrlWrapper } = require("../../helpers");
 const schemas = require("../../schemas");
 
+// User
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
-router.get("/mypets", authenticate, ctrlWrapper(ctrl.getUserPets));
-
 router.patch(
   "/update",
   authenticate,
-  // upload.single("uploadAvatar"),
-  // validateBody(schemas.updateUserSchema),
+  upload.single("avatarURL"),
+  validateBody(schemas.updateUserSchema),
   ctrlWrapper(ctrl.updateUser)
 );
 
+// Pets
 router.post(
-  "/",
+  "/pets",
   authenticate,
   upload.single("uploadPhoto"),
   validateBody(schemas.UserPetSchema),
   ctrlWrapper(ctrl.addUserPet)
 );
-
+router.get("/pets", authenticate, ctrlWrapper(ctrl.getUserPets));
 router.delete(
-  "/:noticeId",
+  "/pets/:noticeId",
   authenticate,
   isValidId,
   ctrlWrapper(ctrl.removeUserPet)
