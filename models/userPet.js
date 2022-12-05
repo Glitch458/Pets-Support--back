@@ -11,7 +11,7 @@ const userPetSchema = new Schema({
   breed: {
     type: String,
   },
-  coments: {
+  comments: {
     type: String,
   },
   petURL: {
