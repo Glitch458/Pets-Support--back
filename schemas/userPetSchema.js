@@ -5,13 +5,13 @@ const UserPetSchema = Joi.object({
     .regex(/^[a-zA-Z]+$/)
     .min(2)
     .max(16),
-  date: Joi.date().format("DD.MM.YYYY").utc(),
+  birthday: Joi.date().format("DD.MM.YYYY").utc(),
   breed: Joi.string()
     .regex(/^[a-zA-Z]+$/)
     .min(2)
     .max(16),
   coments: Joi.string().min(18).max(120),
-  photoURL: Joi.string(),
+  petURL: Joi.string(),
 });
 
 module.exports = UserPetSchema;

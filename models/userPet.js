@@ -5,7 +5,7 @@ const userPetSchema = new Schema({
   name: {
     type: String,
   },
-  date: {
+  birthday: {
     type: String,
   },
   breed: {
@@ -14,7 +14,7 @@ const userPetSchema = new Schema({
   coments: {
     type: String,
   },
-  photoURL: {
+  petURL: {
     type: String,
   },
   owner: {

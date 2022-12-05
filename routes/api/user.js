@@ -27,7 +27,7 @@ router.patch(
 router.post(
   "/pets",
   authenticate,
-  upload.single("uploadPhoto"),
+  upload.single("petURL"),
   validateBody(schemas.UserPetSchema),
   ctrlWrapper(ctrl.addUserPet)
 );
