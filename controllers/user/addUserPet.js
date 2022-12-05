@@ -1,36 +1,36 @@
 const fs = require("fs/promises");
-const path = require("path");
-const Jimp = require("jimp");
+const cloudinary = require("cloudinary").v2;
 
 const { UserPet } = require("../../models/userPet");
-const User = require("../../models/user");
-
 const { RequestError } = require("../../helpers");
-const photoDir = path.join(__dirname, "../../", "public", "pets");
 
 const addUserPet = async (req, res) => {
   const { id: owner } = req.user;
-  const { path: tempUpload, originalname } = req.file;
-  const resultUpload = path.join(photoDir, originalname);
+  let userPetImage = null;
 
-  Jimp.read(tempUpload, (error, photo) => {
-    if (error) throw RequestError(401, "Not authorized");
-    photo.resize(328, 328).write(resultUpload);
-  });
-  await fs.rename(tempUpload, resultUpload);
-  const photoURL = path.join("pets", originalname);
+  if (!owner) {
+    throw RequestError(404, "Not found");
+  }
 
-  const userNotice = await UserPet.create({
+  if (req.file) {
+    const result1 = await cloudinary.uploader.upload(req.file.path);
+    userPetImage = result1.secure_url;
+  } else {
+    userPetImage = owner.photoURL;
+  }
+
+  const result = await UserPet.create({
     ...req.body,
-    photoURL,
+    photoURL: userPetImage,
     owner,
   });
 
-  const result = await User.findByIdAndUpdate(
-    { _id: owner },
-    { $push: { myPets: userNotice } }
-  );
-  res.json(userNotice);
+  if (!result) {
+    throw RequestError(404, "Not found");
+  }
+
+  res.status(201).json(result);
+  await fs.unlink(req.file.path);
 };
 
 module.exports = addUserPet;
