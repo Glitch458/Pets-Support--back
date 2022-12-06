@@ -5,7 +5,7 @@ const UserPetSchema = Joi.object({
     .regex(/^[a-zA-Z]+$/)
     .min(2)
     .max(16),
-  birthday: Joi.date(),
+  birthday: Joi.date().format("DD-MM-YYYY").utc(),
   breed: Joi.string()
     .regex(/^[a-zA-Z]+$/)
     .min(2)
