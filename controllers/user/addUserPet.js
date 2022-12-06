@@ -4,6 +4,7 @@
 const uploadImage = require("../../middlewares/cloudinary");
 
 const { UserPet } = require("../../models/userPet");
+const User = require("../../models/user");
 const { RequestError } = require("../../helpers");
 
 const addUserPet = async (req, res) => {
@@ -24,17 +25,25 @@ const addUserPet = async (req, res) => {
     userPetImage = owner.petURL;
   }
 
-  const result = await UserPet.create({
+  const userNotice = await UserPet.create({
     ...req.body,
     petURL: userPetImage,
     owner,
   });
 
+  const result = await User.findByIdAndUpdate(
+    { _id: owner },
+    { $push: { myPets: userNotice } },
+    {
+      new: true,
+    }
+  );
+
   if (!result) {
     throw RequestError(404, "Not found");
   }
 
-  res.json(result);
+  res.json(userNotice);
   // await fs.unlink(req.file.path);
 };
 
