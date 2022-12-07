@@ -14,7 +14,6 @@ const { ctrlWrapper } = require("../../helpers");
 const schemas = require("../../schemas");
 
 // User
-router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
 router.patch(
   "/update",
   authenticate,
