@@ -1,5 +1,3 @@
-// const fs = require("fs/promises");
-// const cloudinary = require("cloudinary").v2;
 const uploadImage = require("../../middlewares/cloudinary");
 
 const User = require("../../models/user");
@@ -22,13 +20,6 @@ const updateUser = async (req, res) => {
     avatar = _id.avatarURL;
   }
 
-  // if (req.file) {
-  //   const result1 = await cloudinary.uploader.upload(req.file.path);
-  //   avatar = result1.secure_url;
-  // } else {
-  //   avatar = _id.avatarURL;
-  // }
-
   const result = await User.findByIdAndUpdate(
     _id,
     {
@@ -48,7 +39,6 @@ const updateUser = async (req, res) => {
     throw RequestError(404, "Not found");
   }
   res.json(result);
-  // await fs.unlink(req.file.path);
 };
 
 module.exports = updateUser;
