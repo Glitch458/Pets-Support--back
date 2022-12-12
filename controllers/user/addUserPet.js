@@ -1,5 +1,3 @@
-// const fs = require("fs/promises");
-// const cloudinary = require("cloudinary").v2;
 
 const uploadImage = require("../../middlewares/cloudinary");
 
@@ -9,7 +7,6 @@ const { RequestError } = require("../../helpers");
 
 const addUserPet = async (req, res) => {
   const { id: owner } = req.user;
-  // console.log(req.user);
 
   let userPetImage = null;
 
@@ -44,7 +41,6 @@ const addUserPet = async (req, res) => {
   }
 
   res.json(userNotice);
-  // await fs.unlink(req.file.path);
 };
 
 module.exports = addUserPet;

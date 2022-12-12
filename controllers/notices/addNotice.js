@@ -1,5 +1,3 @@
-// const fs = require("fs/promises");
-// const cloudinary = require("cloudinary").v2;
 const uploadImage = require("../../middlewares/cloudinary");
 
 const { Notice } = require("../../models/notice");
@@ -22,13 +20,6 @@ const addNotice = async (req, res) => {
     noticeImg = owner.photoURL;
   }
 
-  // if (req.file) {
-  //   const result1 = await cloudinary.uploader.upload(req.file.path);
-  //   noticeImg = result1.secure_url;
-  // } else {
-  //   noticeImg = owner.photoURL;
-  // }
-
   const result = await Notice.create({
     ...req.body,
     photoURL: noticeImg,
@@ -40,7 +31,6 @@ const addNotice = async (req, res) => {
   }
 
   res.status(201).json(result);
-  // await fs.unlink(req.file.path);
 };
 
 module.exports = addNotice;
